@@ -7,7 +7,7 @@ compatibility_flags = ["nodejs_compat"]
 [[d1_databases]]
 binding = "DB"
 database_name = "bridge-marketplace"
-database_id = "TO_BE_FILLED_AFTER_wrangler_d1_create"
+database_id = "1b723e7e-d695-4cd9-9a16-06a939075075"
 migrations_dir = "migrations"
 
 # R2 bucket for listing images
