@@ -22,5 +22,5 @@ FRONTEND_URL = "https://bridge-marketplace-web.pages.dev"
 DISPUTE_WINDOW_HOURS = "48"
 
 # Cron trigger: release eligible payouts every hour
-[[triggers.crons]]
-cron = "0 * * * *"
+[triggers]
+crons = ["0 * * * *"]
