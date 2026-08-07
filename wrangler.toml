@@ -17,8 +17,8 @@ bucket_name = "bridge-marketplace-images"
 
 # Non-secret vars (secrets go in .dev.vars locally, Worker secrets in prod)
 [vars]
-ENVIRONMENT = "development"
-FRONTEND_URL = "http://localhost:5173"
+ENVIRONMENT = "production"
+FRONTEND_URL = "https://bridge-marketplace-web.pages.dev"
 DISPUTE_WINDOW_HOURS = "48"
 
 # Cron trigger: release eligible payouts every hour

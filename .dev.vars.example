@@ -1,6 +1,10 @@
 # Copy this to .dev.vars and fill in real values for local development
 # Never commit .dev.vars
 
+# Local dev overrides (wrangler.toml sets these to production values)
+ENVIRONMENT=development
+FRONTEND_URL=http://localhost:5173
+
 JWT_SECRET=replace-with-at-least-32-char-random-string
 
 # Twilio (for SMS PIN auth)
