@@ -1,0 +1,13 @@
+{
+  "name": "bridge-marketplace",
+  "private": true,
+  "workspaces": ["api", "web"],
+  "scripts": {
+    "dev:api": "cd api && wrangler dev",
+    "dev:web": "cd web && npm run dev",
+    "deploy:api": "cd api && wrangler deploy",
+    "deploy:web": "cd web && npm run build && wrangler pages deploy dist --project-name bridge-marketplace-web",
+    "migrate": "wrangler d1 migrations apply bridge-marketplace --local",
+    "migrate:prod": "wrangler d1 migrations apply bridge-marketplace"
+  }
+}

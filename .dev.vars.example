@@ -1,0 +1,29 @@
+# Copy this to .dev.vars and fill in real values for local development
+# Never commit .dev.vars
+
+JWT_SECRET=replace-with-at-least-32-char-random-string
+
+# Twilio (for SMS PIN auth)
+TWILIO_ACCOUNT_SID=ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+TWILIO_AUTH_TOKEN=your_auth_token
+TWILIO_PHONE_NUMBER=+1xxxxxxxxxx
+
+# Shippo (shipping labels + tracking)
+SHIPPO_API_KEY=shippo_test_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+SHIPPO_WEBHOOK_SECRET=your_shippo_webhook_secret
+
+# Stripe Connect (payments + payouts)
+STRIPE_SECRET_KEY=sk_test_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+STRIPE_CONNECT_CLIENT_ID=ca_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+STRIPE_WEBHOOK_SECRET=whsec_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+STRIPE_PLATFORM_FEE_PERCENT=5
+
+# Seller's return address for Shippo labels (platform/warehouse or seller-provided)
+PLATFORM_RETURN_ADDRESS_NAME=Bridge Marketplace
+PLATFORM_RETURN_ADDRESS_STREET1=123 Main St
+PLATFORM_RETURN_ADDRESS_CITY=Boston
+PLATFORM_RETURN_ADDRESS_STATE=MA
+PLATFORM_RETURN_ADDRESS_ZIP=02101
+PLATFORM_RETURN_ADDRESS_COUNTRY=US
+PLATFORM_RETURN_ADDRESS_PHONE=+16175550000
+PLATFORM_RETURN_ADDRESS_EMAIL=returns@bridgemarketplace.com
