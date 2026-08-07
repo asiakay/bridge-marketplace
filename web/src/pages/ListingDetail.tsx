@@ -5,7 +5,8 @@ import { Elements, PaymentElement, useStripe, useElements } from '@stripe/react-
 import { api } from '../lib/api';
 import { useAuth } from '../App';
 
-const stripePromise = loadStripe((import.meta as unknown as { env: Record<string, string> }).env['VITE_STRIPE_PUBLISHABLE_KEY'] ?? '');
+const _stripeKey = (import.meta as unknown as { env: Record<string, string> }).env['VITE_STRIPE_PUBLISHABLE_KEY'];
+const stripePromise = _stripeKey ? loadStripe(_stripeKey) : null;
 
 type Rate = {
   rate_id: string;
