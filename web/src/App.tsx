@@ -11,6 +11,7 @@ import BuyerDashboard from './pages/BuyerDashboard';
 import SellerDashboard from './pages/SellerDashboard';
 import AdminDashboard from './pages/AdminDashboard';
 import StripeReturn from './pages/StripeReturn';
+import SellLanding from './pages/SellLanding';
 
 type User = { id: string; email: string; role: string; status: string } | null;
 type AuthCtx = { user: User; setUser: (u: User) => void; loading: boolean };
@@ -47,6 +48,7 @@ function Nav() {
           </>
         ) : (
           <>
+            <Link to="/sell" className="text-gray-600 hover:text-brand-700">Sell on Bridge</Link>
             <Link to="/login" className="text-gray-600 hover:text-brand-700">Login</Link>
             <Link to="/register" className="bg-brand-600 text-white px-3 py-1.5 rounded hover:bg-brand-700">
               Sign up
@@ -84,6 +86,7 @@ export default function App() {
             <Route path="/orders" element={<BuyerDashboard />} />
             <Route path="/selling" element={<SellerDashboard />} />
             <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/sell" element={<SellLanding />} />
             <Route path="/stripe/connect/return" element={<StripeReturn />} />
             <Route path="/stripe/connect/refresh" element={<StripeReturn refresh />} />
           </Routes>
