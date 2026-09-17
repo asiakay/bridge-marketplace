@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { api } from '../lib/api';
 import { useAuth } from '../App';
+import SellerOnboarding from '../components/SellerOnboarding';
 
 function dollars(cents: number) {
   return `$${(cents / 100).toFixed(2)}`;
@@ -38,6 +39,9 @@ export default function SellerDashboard() {
     if (!user) { navigate('/login'); return; }
     if (user.role !== 'seller' && user.role !== 'both') { navigate('/'); return; }
 
+    // Pending users can view the onboarding checklist but can't call approved-only endpoints
+    if (user.status !== 'approved') { setFetching(false); return; }
+
     Promise.all([
       api.getMyListings(),
       api.getOrders('seller'),
@@ -49,11 +53,6 @@ export default function SellerDashboard() {
       setFetching(false);
     }).catch(() => setFetching(false));
   }, [user, loading]);
-
-  const startOnboarding = async () => {
-    const data = await api.startStripeOnboard();
-    window.location.href = data.onboarding_url;
-  };
 
   const removeListing = async (id: string) => {
     await api.deleteListing(id).catch(() => {});
@@ -72,23 +71,7 @@ export default function SellerDashboard() {
         </Link>
       </div>
 
-      {/* Stripe Connect banner */}
-      {stripeStatus && !stripeStatus.payouts_enabled && (
-        <div className="bg-amber-50 border border-amber-200 rounded p-4 mb-6 flex items-center justify-between">
-          <div>
-            <p className="font-medium text-amber-800">Set up payouts to receive money from sales</p>
-            <p className="text-sm text-amber-700 mt-1">
-              {stripeStatus.connected
-                ? 'Your Stripe account needs more information before payouts can be enabled.'
-                : 'Connect your bank account via Stripe to receive seller payouts.'}
-            </p>
-          </div>
-          <button onClick={startOnboarding}
-            className="bg-amber-600 text-white px-4 py-2 rounded text-sm hover:bg-amber-700 ml-4 whitespace-nowrap">
-            {stripeStatus.connected ? 'Complete setup' : 'Set up payouts'}
-          </button>
-        </div>
-      )}
+      <SellerOnboarding stripeStatus={stripeStatus} listingCount={listings.length} />
 
       <div className="flex gap-4 border-b mb-4">
         {(['listings', 'orders'] as const).map(t => (
