@@ -42,16 +42,16 @@ export default function SellerDashboard() {
     // Pending users can view the onboarding checklist but can't call approved-only endpoints
     if (user.status !== 'approved') { setFetching(false); return; }
 
-    Promise.all([
+    Promise.allSettled([
       api.getMyListings(),
       api.getOrders('seller'),
       api.getStripeStatus(),
     ]).then(([l, o, s]) => {
-      setListings(l.listings);
-      setOrders(o.orders);
-      setStripeStatus(s);
+      if (l.status === 'fulfilled') setListings(l.value.listings);
+      if (o.status === 'fulfilled') setOrders(o.value.orders);
+      if (s.status === 'fulfilled') setStripeStatus(s.value);
       setFetching(false);
-    }).catch(() => setFetching(false));
+    });
   }, [user, loading]);
 
   const removeListing = async (id: string) => {
