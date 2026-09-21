@@ -26,8 +26,13 @@ export default function Verify() {
     try {
       const data = await api.verify(state.user_id, pin);
       setUser(data.user as { id: string; email: string; role: string; status: string });
+      const isSeller = data.user.role === 'seller' || data.user.role === 'both';
       if (data.user.status === 'pending') {
-        navigate('/orders', { state: { notice: 'Your account is pending approval. You can browse listings while you wait.' } });
+        if (isSeller) {
+          navigate('/selling');
+        } else {
+          navigate('/orders', { state: { notice: 'Your account is pending approval. You can browse listings while you wait.' } });
+        }
       } else {
         navigate('/');
       }
