@@ -31,7 +31,7 @@ export default function SellLanding() {
         <p className="mt-4 text-lg text-gray-600 max-w-xl mx-auto">
           A vetted community marketplace. List your things, earn real money, and ship without the hassle.
         </p>
-        <Link to="/register"
+        <Link to="/register?role=seller"
           className="inline-block mt-6 bg-brand-600 text-white px-8 py-3 rounded-lg font-medium text-base hover:bg-brand-700 transition-colors">
           Apply to sell
         </Link>
@@ -87,7 +87,7 @@ export default function SellLanding() {
       {/* Bottom CTA */}
       <div className="py-12 text-center">
         <p className="text-gray-600 mb-4">Ready to start selling?</p>
-        <Link to="/register"
+        <Link to="/register?role=seller"
           className="inline-block bg-brand-600 text-white px-8 py-3 rounded-lg font-medium text-base hover:bg-brand-700 transition-colors">
           Apply to sell
         </Link>
