@@ -61,7 +61,7 @@ export default function SellerOnboarding({
         <Step n={3} label="Get approved to sell" status={stepStatus(approved, 3)}>
           {!approved && (
             <p className="text-sm text-amber-800 bg-amber-50 border border-amber-200 rounded px-3 py-2">
-              Your application is under review. You'll receive an SMS when your account is approved.
+              Your application is under review. Check back here to see when your account is approved.
             </p>
           )}
         </Step>
