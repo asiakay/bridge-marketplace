@@ -1,12 +1,16 @@
 import { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useSearchParams } from 'react-router-dom';
 import { api } from '../lib/api';
 
+const VALID_ROLES = ['buyer', 'seller', 'both'];
+
 export default function Register() {
+  const [searchParams] = useSearchParams();
+  const paramRole = searchParams.get('role') ?? '';
   const [form, setForm] = useState({
     email: '',
     phone: '',
-    role: 'buyer',
+    role: VALID_ROLES.includes(paramRole) ? paramRole : 'buyer',
     invite_code: '',
   });
   const [error, setError] = useState('');

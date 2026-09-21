@@ -35,7 +35,7 @@ function Nav() {
       <div className="flex items-center gap-4 text-sm">
         {user ? (
           <>
-            {(user.role === 'seller' || user.role === 'both') && user.status === 'approved' && (
+            {(user.role === 'seller' || user.role === 'both') && (user.status === 'pending' || user.status === 'approved') && (
               <>
                 <Link to="/selling" className="text-gray-600 hover:text-brand-700">My Listings</Link>
                 <Link to="/listings/create" className="text-gray-600 hover:text-brand-700">+ List Item</Link>

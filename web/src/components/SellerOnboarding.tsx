@@ -35,13 +35,28 @@ export default function SellerOnboarding({
 
   if (!user) return null;
 
-  const approved = user.status === 'approved';
+  const { status } = user;
+  const approved = status === 'approved';
+  const pending = status === 'pending';
+  const terminal = status === 'rejected' || status === 'suspended';
   const stripeReady = !!stripeStatus?.payouts_enabled;
   const hasListings = listingCount > 0;
 
   if (approved && stripeReady && hasListings) return null;
 
-  const currentStep = !approved ? 3 : !stripeReady ? 4 : 5;
+  if (terminal) {
+    return (
+      <div className="border border-red-200 bg-red-50 rounded-lg p-5 mb-6">
+        <p className="text-sm font-medium text-red-800">
+          {status === 'rejected'
+            ? 'Your seller application was not approved. Contact support if you have questions.'
+            : 'Your seller account has been suspended. Contact support for assistance.'}
+        </p>
+      </div>
+    );
+  }
+
+  const currentStep = pending ? 3 : !stripeReady ? 4 : 5;
 
   const stepStatus = (done: boolean, step: number): StepStatus =>
     done ? 'done' : currentStep === step ? 'current' : 'upcoming';
@@ -59,9 +74,9 @@ export default function SellerOnboarding({
         <Step n={2} label="Verify your phone number" status="done" />
 
         <Step n={3} label="Get approved to sell" status={stepStatus(approved, 3)}>
-          {!approved && (
+          {pending && (
             <p className="text-sm text-amber-800 bg-amber-50 border border-amber-200 rounded px-3 py-2">
-              Your application is under review. You'll receive an SMS when your account is approved.
+              Your application is under review. Check back here to see when your account is approved.
             </p>
           )}
         </Step>
